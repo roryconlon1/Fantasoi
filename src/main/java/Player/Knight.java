@@ -2,11 +2,13 @@ package Player;
 
 import Moves.IAttack;
 import Room.Badoi;
+import Room.Enemy;
+import Room.Room;
 import Room.Treasure;
 
 import java.util.ArrayList;
 
-public class Knight extends Player implements IAttack {
+public class Knight extends Player {
 
     private int armour;
 
@@ -24,11 +26,8 @@ public class Knight extends Player implements IAttack {
     }
 
 
-    public void getHit(Badoi badoi){
-        setHealth(getHealth() - (badoi.getHitPower() - getArmour()));
+    public void getHit(Enemy enemy){
+        setHealth(getHealth() - (enemy.getHitDamage() - getArmour()));
     }
-
-
-
 
 }

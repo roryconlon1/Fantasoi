@@ -1,6 +1,7 @@
 package Player;
 
 import Room.Badoi;
+import Room.Enemy;
 import Room.Treasure;
 
 import java.util.ArrayList;
@@ -45,19 +46,24 @@ public abstract class Player {
         return getMoveType().getDamageEffect();
     }
 
-    public void getHit(Badoi badoi){
-        setHealth(getHealth() - badoi.getHitPower());
+    public void getHit(Enemy enemy){
+        setHealth(getHealth() - enemy.getHitDamage());
     }
 
     public void addTreasure(Treasure treasure){
         swagBag.add(treasure);
     }
 
-    public void canAttack(Badoi badoi){
-        badoi.setHealth(badoi.getHealth() - getMoveType().getDamageEffect());
+    public void canAttack(Enemy enemy){
+        if (enemy.getHealth() < 1){
+            enemy.setBadoi(Badoi.NONE);
+            enemy.setHealth(getMoveType().getDamageEffect());
+        }
+        enemy.setHealth(enemy.getHealth() - getMoveType().getDamageEffect());
     }
 
     public void changeMove(MoveType moveType){
         setMoveType(moveType);
     }
+
 }
